@@ -1,7 +1,5 @@
 ﻿using System;
 
-
-Console.WriteLine("Hello World!");
 main();
 int getNumber()
 {
@@ -87,18 +85,21 @@ int setLevel()
 int askUser()
 {
     Console.WriteLine("|-------------------------------------------------------------------|");
-    Console.WriteLine("|----   Please Guess the secret number :       ---------------------|");
+    Console.WriteLine("|----   Please Guess the secret number 1 to 100 :       ------------|");
     Console.Write("|       Your Guess Is:");
     string playerResponse = Console.ReadLine();
     int playerNumber;
-    if (Int32.TryParse(playerResponse, out playerNumber))
+    bool goodNumber = false;
+    if (Int32.TryParse(playerResponse, out playerNumber)){
+        if (playerNumber >1 && playerNumber < 100) goodNumber = true;
+    }
+    if(goodNumber)
     {
-
         return playerNumber;
     }
     else
     {
-        Console.WriteLine("|----   It has to be a number :       ------------------------------|");
+        Console.WriteLine("|----   It has to be a number between 1 and 100 :     ---------------|");
         askUser();
         return 0;
     }
