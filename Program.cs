@@ -42,6 +42,40 @@ bool checkIfWinner(int userguess, int rndNumber, int loopCount)
         return false;
     }
 }
+int setLevel()
+{
+    bool validAnswer = false;
+
+    do
+    {
+        //code block
+        Console.WriteLine("|-------------------------------------------------------------------|");
+        Console.WriteLine("|----   Please Select a level :       ------------------------------|");
+        Console.WriteLine("|----   1) easy, 2) medium, 3) hard       --------------------------|");
+        Console.Write("|----   Your Level:");
+        string answer = Console.ReadLine();
+        if(answer.ToLower() == "1"){
+            validAnswer = true;
+            Console.WriteLine("|----   You have Selected Easy       -------------------------------|");
+            return 8;
+        } else if (answer.ToLower() == "2")
+        {
+                        validAnswer = true;
+            Console.WriteLine("|----   You have Selected Medium       -----------------------------|");
+            return 6;
+        } else if (answer.ToLower() == "3")
+        {
+                        validAnswer = true;
+            Console.WriteLine("|----   You have Selected Hard       -------------------------------|");
+            return 4;
+        }else{
+            validAnswer = false;
+            Console.WriteLine("|----   Choose 1,  2   or 3       ----------------------------------|");
+        }
+       Console.WriteLine("|-------------------------------------------------------------------|");
+    } while (!validAnswer);
+    return 0;
+}
 int askUser()
 {
     Console.WriteLine("|-------------------------------------------------------------------|");
@@ -64,9 +98,9 @@ int askUser()
 }
 void main()
 {
-
+    int level = setLevel();
     int compNumber = getNumber();
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < level; i++)
     {
         int intGuess = askUser();
         if (checkIfWinner(intGuess, compNumber, i)) break;
