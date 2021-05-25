@@ -4,13 +4,14 @@
 Console.WriteLine("Hello World!");
 main();
 int getNumber()
-{    
+{
     Random rnd = new Random();
     int toGuessValue = rnd.Next(1, 101);
     return toGuessValue;
 }
-bool checkIfWinner(int userguess,int rndNumber, int loopCount)
+bool checkIfWinner(int userguess, int rndNumber, int loopCount)
 {
+    bool toHigh = true;
     if (userguess == rndNumber)
     {
         Console.WriteLine("|----   Winner winner Chicken dinner   -----------------------------|");
@@ -19,15 +20,25 @@ bool checkIfWinner(int userguess,int rndNumber, int loopCount)
     }
     else
     {
+        if (userguess < rndNumber) toHigh = false;
         Console.WriteLine("|----   L L L L L L is for Loser               ---------------------|");
         Console.Write("|----   The number you guessed is :" + userguess.ToString());
-        Console.Write("  You have " + (4 - (loopCount +1)).ToString() + " ");
+
+        Console.Write("  You have " + (4 - (loopCount + 1)).ToString() + " ");
         for (int i = 0; i < (20 - userguess.ToString().Length); i++)
         {
             Console.Write('-');
         }
         Console.Write('|');
         Console.WriteLine();
+        if (toHigh)
+        {
+            Console.WriteLine("|++++   your Guess was to High High High High       ++++++++++++++++|");
+        }
+        else
+        {
+            Console.WriteLine("|^^^^   your Guess was to Low Low Low               ^^^^^^^^^^^^^^^^|");
+        }
         return false;
     }
 }
@@ -53,11 +64,13 @@ int askUser()
 }
 void main()
 {
+
     int compNumber = getNumber();
-    for(int i =0; i<4; i++){
+    for (int i = 0; i < 4; i++)
+    {
         int intGuess = askUser();
-        if(checkIfWinner(intGuess,compNumber ,i)) break;
+        if (checkIfWinner(intGuess, compNumber, i)) break;
     }
-    
+
 
 }
