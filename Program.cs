@@ -9,7 +9,7 @@ int getNumber()
     int toGuessValue = rnd.Next(1, 101);
     return toGuessValue;
 }
-bool checkIfWinner(int userguess, int rndNumber, int loopCount)
+bool checkIfWinner(int userguess, int rndNumber, int loopCount, int level)
 {
     bool toHigh = true;
     if (userguess == rndNumber)
@@ -22,15 +22,18 @@ bool checkIfWinner(int userguess, int rndNumber, int loopCount)
     {
         if (userguess < rndNumber) toHigh = false;
         Console.WriteLine("|----   L L L L L L is for Loser               ---------------------|");
-        Console.Write("|----   The number you guessed is :" + userguess.ToString());
-
-        Console.Write("  You have " + (4 - (loopCount + 1)).ToString() + " ");
-        for (int i = 0; i < (20 - userguess.ToString().Length); i++)
+        Console.Write("|----   The number you guessed is :" + userguess.ToString() + " ");
+        for (int i = 0; i < (32 - userguess.ToString().Length); i++)
         {
             Console.Write('-');
         }
-        Console.Write('|');
-        Console.WriteLine();
+        Console.WriteLine("|");
+        Console.Write("|----   You have " + (level - (loopCount + 1)).ToString() + " ");
+                for (int i = 0; i < (50 - level.ToString().Length); i++)
+        {
+            Console.Write('-');
+        }
+        Console.WriteLine("|");
         if (toHigh)
         {
             Console.WriteLine("|++++   your Guess was to High High High High       ++++++++++++++++|");
@@ -68,6 +71,11 @@ int setLevel()
                         validAnswer = true;
             Console.WriteLine("|----   You have Selected Hard       -------------------------------|");
             return 4;
+        } else if (answer.ToLower() == "cheater")
+        {
+            validAnswer = true;
+            Console.WriteLine("|----   You have Selected Cheat       ------------------------------|");
+            return int.MaxValue;
         }else{
             validAnswer = false;
             Console.WriteLine("|----   Choose 1,  2   or 3       ----------------------------------|");
@@ -103,7 +111,7 @@ void main()
     for (int i = 0; i < level; i++)
     {
         int intGuess = askUser();
-        if (checkIfWinner(intGuess, compNumber, i)) break;
+        if (checkIfWinner(intGuess, compNumber, i,level)) break;
     }
 
 
